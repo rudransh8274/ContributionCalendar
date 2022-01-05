@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Expenditure Calendar</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            background-color: #111;
+            color:white;
+            font-family:'Montserrat', sans-serif;
+        }
+        nav{
+            background-color: #000;
+            display: flex;
+            justify-content: space-between;
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        #logo{
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+        }
+        #linksHolder{
+            width: 30%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .suppressedBtn{
+            background: none;
+            color: inherit;
+            border: none;
+            padding-right: 20px;
+            font: inherit;
+            cursor: pointer;
+            outline: inherit;
+        }
+        .suppressedBtn:hover{
+            color:coral;
+        }
+        header{
+            text-align: center;
+            padding-top: 5%;
+            padding-bottom: 5%;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/viewCalendar.css">
+</head>
+<body>
+    <nav>
+        <div id="logo">
+            The Fruit Shop
+        </div>
+        <div id="linksHolder">
+            <form action="viewCalendar.html" method="post">
+                <button class="suppressedBtn" type="submit">View Expenditure Calendar</button>
+            </form>
+            <form action="/auth/viewCalendar" method="post">
+                <button class="suppressedBtn" type="submit">Analyze</button>
+            </form>
+        </div>
+    </nav>
+    <!-- Graph Container -->
+    <header>
+        <h1>Expenditure Calendar</h1>
+    </header>
+    <div id="graph">
+        <div id="weekList">
+            <h6 class="weekDay"> </h6>
+            <h6 class="weekDay">Mon</h6>
+            <h6 class="weekDay">Tue</h6>
+            <h6 class="weekDay">Wed</h6>
+            <h6 class="weekDay">Thu</h6>
+            <h6 class="weekDay">Fri</h6>
+            <h6 class="weekDay">Sat</h6>
+            <h6 class="weekDay">Sun</h6>
+        </div>
+        <div>
+            <div id="monthList">
+                <h6>Jan</h6>
+                <h6>Feb</h6>
+                <h6>Mar</h6>
+                <h6>Apr</h6>
+                <h6>May</h6>
+                <h6>Jun</h6>
+                <h6>Jul</h6>
+                <h6>Aug</h6>
+                <h6>Sept</h6>
+                <h6>Oct</h6>
+                <h6>Nov</h6>
+                <h6>Dec</h6>
+            </div>
+            <div id="graphContainer" style="display:flex; justify-content:center;">
+                
+            </div>
+        </div>
+    </div>
+    <script>
+        const cellColors = [...Array(53*7)].map(_=>Math.ceil(Math.random()*256));
+
+        console.log(cellColors);
+
+        const setCellColor = (red)=>{
+            return "#"+red.toString(16)+"0000";
+        }
+
+        const graphContainer = document.getElementById('graphContainer');
+        for(let i=0; i<53*7; i+=7){
+            graphContainer.innerHTML += `
+            <div class="weekContainer">
+                <div class="cell" style="background-color:${setCellColor(cellColors[0+i])};"></div>
+                <div class="cell" style="background-color:${setCellColor(cellColors[1+i])};"></div>
+                <div class="cell" style="background-color:${setCellColor(cellColors[2+i])};"></div>
+                <div class="cell" style="background-color:${setCellColor(cellColors[3+i])};"></div>
+                <div class="cell" style="background-color:${setCellColor(cellColors[4+i])};"></div>
+                <div class="cell" style="background-color:${setCellColor(cellColors[5+i])};"></div>
+                <div class="cell" style="background-color:${setCellColor(cellColors[6+i])};"></div>
+            </div>
+            `
+        }
+    </script>
+</body>
+</html>
